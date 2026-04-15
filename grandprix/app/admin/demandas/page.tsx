@@ -1,149 +1,64 @@
 import { mockDemandas } from '@/lib/mock-data';
-import { StatusBadge } from '@/components/forum/StatusBadge';
-import { formatDate } from '@/utils/formatters';
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableHead, 
-  TableHeader, 
-  TableRow 
-} from '@/components/ui/table';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { DemandTable } from '@/components/features/demands/DemandTable';
+import { DemandFilters } from '@/components/features/demands/DemandFilters';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { 
-  Search, 
-  Filter, 
-  ArrowUpDown, 
-  MoreHorizontal, 
-  FileText,
-  Download,
-  AlertCircle
-} from 'lucide-react';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { PRIORIDADE_DEMANDA } from '@/utils/constants';
+import { Download, LayoutDashboard } from 'lucide-react';
 import Link from 'next/link';
 
 export default function AdminDemandasListPage() {
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div className="space-y-8">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-black text-foreground tracking-tight">Todas as <span className="text-brand-green">Demandas</span></h1>
-          <p className="text-muted-foreground font-medium">Gerencie e responda todos os relatos do sistema.</p>
+          <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">Gerenciamento de Demandas</h1>
+          <p className="text-slate-500 mt-1 uppercase tracking-widest text-[10px] font-bold">Listagem completa e filtros avançados</p>
         </div>
-        <Button className="bg-brand-green hover:bg-brand-mid text-white font-bold h-11 px-6 rounded-xl shadow-lg shadow-brand-green/20">
-          <Download className="mr-2 h-4 w-4" /> Exportar Planilha
-        </Button>
+        <div className="flex gap-2">
+          <Link href="/admin/dashboard">
+            <Button variant="outline" className="h-11 px-6 gap-2 font-bold uppercase tracking-widest text-[10px] border-slate-200">
+              <LayoutDashboard className="w-4 h-4" />
+              Painel Geral
+            </Button>
+          </Link>
+          <Button className="h-11 px-8 gap-2 font-bold uppercase tracking-widest text-[10px] shadow-sm">
+            <Download className="w-4 h-4" />
+            Exportar Dados
+          </Button>
+        </div>
       </div>
 
-      <Card className="border-none shadow-md overflow-hidden bg-white">
-        <CardHeader className="p-6 border-b flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="relative w-full md:max-w-md">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input 
-              placeholder="Pesquisar por título, ID ou autor..." 
-              className="pl-10 h-10 bg-muted/50 border-transparent focus:bg-white focus:border-brand-green transition-all"
-            />
+      <DemandFilters />
+
+      <div className="space-y-4">
+        <div className="flex items-center justify-between px-2">
+          <h2 className="text-sm font-bold text-slate-500 uppercase tracking-widest">
+            Exibindo {mockDemandas.length} Resultados
+          </h2>
+          <div className="flex items-center gap-1">
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mr-2">Ordenar por:</span>
+            <Button variant="ghost" className="h-8 text-[10px] font-bold uppercase tracking-widest py-0 px-2 h-7">Data</Button>
+            <Button variant="ghost" className="h-8 text-[10px] font-bold uppercase tracking-widest py-0 px-2 h-7 text-muted-foreground">Prioridade</Button>
           </div>
-          <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm" className="font-bold text-xs h-10 px-4">
-              <Filter className="mr-2 h-3.5 w-3.5" /> Filtros Avançados
-            </Button>
-            <Button variant="outline" size="sm" className="font-bold text-xs h-10 px-4">
-              <ArrowUpDown className="mr-2 h-3.5 w-3.5" /> Ordenar
-            </Button>
-          </div>
-        </CardHeader>
-        <CardContent className="p-0">
-          <Table>
-            <TableHeader>
-              <TableRow className="bg-muted/30 hover:bg-muted/30 border-b">
-                <TableHead className="w-[100px] font-bold text-[10px] uppercase tracking-widest text-muted-foreground pl-6">ID</TableHead>
-                <TableHead className="font-bold text-[10px] uppercase tracking-widest text-muted-foreground">Demanda</TableHead>
-                <TableHead className="font-bold text-[10px] uppercase tracking-widest text-muted-foreground">Status</TableHead>
-                <TableHead className="font-bold text-[10px] uppercase tracking-widest text-muted-foreground">Prioridade</TableHead>
-                <TableHead className="font-bold text-[10px] uppercase tracking-widest text-muted-foreground">Autor</TableHead>
-                <TableHead className="font-bold text-[10px] uppercase tracking-widest text-muted-foreground text-right pr-6">Ações</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {mockDemandas.map((demanda) => {
-                const prioridade = PRIORIDADE_DEMANDA[demanda.prioridade];
-                return (
-                  <TableRow key={demanda.id} className="hover:bg-muted/10 transition-colors group">
-                    <TableCell className="font-bold text-muted-foreground pl-6 text-xs">
-                      #{demanda.id.padStart(4, '0')}
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex flex-col">
-                        <span className="font-bold text-foreground group-hover:text-brand-green transition-colors">{demanda.titulo}</span>
-                        <span className="text-[10px] text-muted-foreground font-medium">{demanda.unidade} • {demanda.categoria.nome}</span>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <StatusBadge status={demanda.status} className="scale-90 origin-left" />
-                    </TableCell>
-                    <TableCell>
-                       <div className="flex items-center gap-1.5 text-xs font-bold" style={{ color: prioridade?.color }}>
-                            <AlertCircle className="h-3 h-3" />
-                            {prioridade?.label}
-                        </div>
-                    </TableCell>
-                    <TableCell className="text-xs font-medium text-muted-foreground">
-                      {demanda.autor.name.split(' ')[0]} {demanda.autor.name.split(' ').slice(-1)}
-                    </TableCell>
-                    <TableCell className="text-right pr-6">
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-brand-light hover:text-brand-dark">
-                            <MoreHorizontal className="h-4 w-4" />
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" className="w-56">
-                          <DropdownMenuLabel>Ações da Demanda</DropdownMenuLabel>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem asChild>
-                            <Link href={`/admin/demandas/${demanda.id}`} className="cursor-pointer">
-                                <FileText className="mr-2 h-4 w-4" /> Ver Detalhes
-                            </Link>
-                          </DropdownMenuItem>
-                          <DropdownMenuItem className="cursor-pointer">
-                            <MessageCircle className="mr-2 h-4 w-4" /> Responder
-                          </DropdownMenuItem>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuLabel className="text-xs text-muted-foreground">Alterar Status</DropdownMenuLabel>
-                          <DropdownMenuItem className="text-xs">Marcar como Analisada</DropdownMenuItem>
-                          <DropdownMenuItem className="text-xs">Marcar como Resolvida</DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
-      
-      {/* Footer Info */}
-      <div className="flex items-center justify-between px-2">
-          <p className="text-xs text-muted-foreground font-medium">
-            Exibindo <strong>{mockDemandas.length}</strong> de <strong>{mockDemandas.length}</strong> demandas cadastradas
-          </p>
-          <div className="flex gap-1">
-              <Button variant="outline" size="sm" disabled className="h-8 px-3 text-xs font-bold">Anterior</Button>
-              <Button variant="outline" size="sm" className="h-8 px-3 text-xs font-bold bg-brand-light text-brand-dark border-brand-green/30">1</Button>
-              <Button variant="outline" size="sm" disabled className="h-8 px-3 text-xs font-bold">Próximo</Button>
-          </div>
+        </div>
+        
+        <DemandTable data={mockDemandas} isAdmin />
+      </div>
+
+      <div className="flex items-center justify-center py-4">
+        <div className="flex items-center gap-1 bg-white border border-slate-200 p-1 rounded-xl shadow-sm">
+          <Button variant="ghost" size="sm" disabled className="h-8 w-8 p-0">
+            &lt;
+          </Button>
+          <Button size="sm" className="h-8 w-8 p-0 font-bold text-xs bg-primary text-white">
+            1
+          </Button>
+          <Button variant="ghost" size="sm" className="h-8 w-8 p-0 font-bold text-xs text-slate-600">
+            2
+          </Button>
+          <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+            &gt;
+          </Button>
+        </div>
       </div>
     </div>
   );

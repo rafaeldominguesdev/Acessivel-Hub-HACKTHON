@@ -1,64 +1,115 @@
-import { mockDemandas } from '@/lib/mock-data';
-import { Button } from '@/components/ui/button';
-import { PlusCircle, Search, Filter } from 'lucide-react';
-import { Input } from '@/components/ui/input';
-import Link from 'next/link';
-import { PostCard } from '@/components/forum/PostCard';
+import { mockDemandas } from "@/lib/mock-data";
+import { Button } from "@/components/ui/button";
+import { 
+  PlusCircle, 
+  ArrowUpRight, 
+  CheckCircle2, 
+  Clock, 
+  AlertCircle 
+} from "lucide-react";
+import Link from "next/link";
+import { DemandTable } from "@/components/features/demands/DemandTable";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function ForumPage() {
+  // Simular demandas do usuário logado (Ana Paula Souza - ID: 1)
+  const userDemands = mockDemandas.filter(d => d.autor.id === '1');
+  
+  const stats = [
+    {
+      title: "Minhas Demandas",
+      value: userDemands.length,
+      icon: PlusCircle,
+      color: "text-blue-600",
+      bg: "bg-blue-50",
+    },
+    {
+      title: "Em Andamento",
+      value: userDemands.filter(d => d.status === 'EM_ANDAMENTO').length,
+      icon: Clock,
+      color: "text-amber-600",
+      bg: "bg-amber-50",
+    },
+    {
+      title: "Resolvidas",
+      value: userDemands.filter(d => d.status === 'RESOLVIDA').length,
+      icon: CheckCircle2,
+      color: "text-emerald-600",
+      bg: "bg-emerald-50",
+    },
+    {
+      title: "Em Análise",
+      value: userDemands.filter(d => d.status === 'EM_ANALISE').length,
+      icon: AlertCircle,
+      color: "text-slate-600",
+      bg: "bg-slate-50",
+    },
+  ];
+
   return (
-    <div className="space-y-8 animate-fade-in">
-      {/* Hero Section / Welcome - macOS Aesthetic Clean */}
-      <div className="card-premium rounded-[32px] p-12 shadow-macos-lg border-none relative overflow-hidden group bg-white animate-slide-up">
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
-          <div className="max-w-xl">
-            <h1 className="text-4xl font-black text-foreground mb-4 tracking-tight leading-tight">
-              Olá, <span className="gradient-text">bem-vindo</span> ao Portal de Acessibilidade
-            </h1>
-            <p className="text-muted-foreground text-lg font-medium leading-relaxed">
-              Ajude-nos a transformar a Petrobras em um ambiente cada vez mais inclusivo e acessível para todos os colaboradores.
-            </p>
-          </div>
-          <Link href="/nova-demanda" className="shrink-0">
-            <Button className="bg-brand-green hover:bg-brand-mid text-white px-8 h-12 rounded-full text-sm font-black uppercase tracking-widest shadow-macos shadow-brand-green/20 transition-all hover:scale-[1.02] active:scale-95 border-none">
-              <PlusCircle className="mr-2 h-5 w-5" />
-              Nova Demanda
-            </Button>
-          </Link>
+    <div className="space-y-8">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">Dashboard de Acessibilidade</h1>
+          <p className="text-slate-500 mt-1 uppercase tracking-widest text-[10px] font-bold">Resumo das suas contribuições</p>
         </div>
-        {/* Subtle Decorative elements */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-brand-yellow/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-green/5 rounded-full blur-3xl" />
+        <Link href="/nova-demanda">
+          <Button className="h-11 px-6 gap-2 font-bold uppercase tracking-widest text-[10px] shadow-sm">
+            <PlusCircle className="w-4 h-4" />
+            Nova Demanda
+          </Button>
+        </Link>
       </div>
 
-      {/* Filters & Search - macOS Aesthetic Clean */}
-      <div className="flex flex-col md:flex-row gap-4 items-center justify-between bg-white/50 backdrop-blur-md p-3 rounded-2xl border border-black/[0.03] shadow-macos animate-slide-up [animation-delay:200ms]">
-        <div className="relative w-full md:max-w-md">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input 
-            placeholder="Buscar relatos ou categorias..." 
-            className="pl-11 h-11 bg-white border-black/[0.05] rounded-xl focus-visible:ring-brand-green placeholder:text-muted-foreground/50 text-foreground shadow-sm"
-          />
-        </div>
-        <div className="flex items-center gap-2 w-full md:w-auto">
-          <Button variant="ghost" className="h-11 px-4 rounded-xl hover:bg-black/[0.03] text-[10px] font-black uppercase tracking-widest text-muted-foreground">
-            <Filter className="mr-2 h-4 w-4 text-brand-green" />
-            Filtros
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {stats.map((stat, idx) => (
+          <Card key={idx} className="border-slate-200 shadow-sm overflow-hidden group hover:border-primary/20 transition-colors">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+                {stat.title}
+              </CardTitle>
+              <div className={`${stat.bg} ${stat.color} p-2 rounded-lg`}>
+                <stat.icon className="w-4 h-4" />
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-black text-slate-900">{stat.value}</div>
+              <div className="flex items-center gap-1 text-[10px] font-bold text-emerald-600 mt-1">
+                <ArrowUpRight className="w-3 h-3" />
+                <span>Atualizado hoje</span>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2">
+            Minhas Postagens Recentes
+            <span className="bg-slate-100 text-slate-600 text-[10px] px-2 py-0.5 rounded-full">
+              {userDemands.length}
+            </span>
+          </h2>
+          <Button variant="link" className="text-xs font-bold text-primary uppercase tracking-widest p-0">
+            Ver todas
           </Button>
-          <div className="h-6 w-px bg-black/[0.05] hidden md:block mx-1" />
-          <p className="text-[10px] text-muted-foreground/60 font-black uppercase tracking-[0.1em] hidden md:block px-2">
-            Total: <span className="text-brand-green">{mockDemandas.length}</span> relatos
+        </div>
+        
+        <DemandTable data={userDemands} />
+      </div>
+
+      <div className="bg-primary/5 border border-primary/10 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="max-w-xl text-center md:text-left">
+          <h3 className="text-lg font-bold text-primary">Como funciona este fórum?</h3>
+          <p className="text-sm text-slate-600 mt-1">
+            Cada relato seu é transformado em uma demanda acionável para a gestão. 
+            Você receberá notificações aqui mesmo quando um administrador responder.
           </p>
         </div>
-      </div>
-
-      {/* post list */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {mockDemandas.map((demanda, index) => (
-          <div key={demanda.id} className="animate-slide-up" style={{ animationDelay: `${(index + 2) * 100}ms` }}>
-            <PostCard demanda={demanda} />
-          </div>
-        ))}
+        <Button variant="outline" className="border-primary/20 bg-white text-primary font-bold uppercase tracking-widest text-[10px] px-6 h-10 hover:bg-primary/5 transition-colors">
+          Saiba Mais
+        </Button>
       </div>
     </div>
   );

@@ -1,19 +1,21 @@
 import { mockDemandas } from '@/lib/mock-data';
-import { PostDetail } from '@/components/forum/PostDetail';
+import { DemandDetail } from '@/components/features/demands/DemandDetail';
 import { notFound } from 'next/navigation';
 
 interface DemandaDetailPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
-export default function DemandaDetailPage({ params }: DemandaDetailPageProps) {
-  const demanda = mockDemandas.find((d) => d.id === params.id);
+export default async function DemandaDetailPage({ params }: DemandaDetailPageProps) {
+  const { id } = await params;
+  const demanda = mockDemandas.find((d) => d.id === id);
 
   if (!demanda) {
     notFound();
   }
 
-  return <PostDetail demanda={demanda} />;
+  return <DemandDetail demanda={demanda} />;
 }
+

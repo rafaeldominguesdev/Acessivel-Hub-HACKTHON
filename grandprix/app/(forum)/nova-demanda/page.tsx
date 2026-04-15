@@ -1,5 +1,9 @@
-import { NewPostForm } from '@/components/forum/NewPostForm';
+import { DemandForm } from "@/components/features/demands/DemandForm";
 
-export default function NewPostPage() {
-  return <NewPostForm />;
+export default function NovaDemandaPage() {
+  return (
+    <div className="py-4">
+      <DemandForm />
+    </div>
+  );
 }
