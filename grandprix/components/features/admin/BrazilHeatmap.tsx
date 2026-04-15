@@ -119,7 +119,7 @@ export function BrazilHeatmap() {
         </div>
       </div>
 
-      {/* Área do Mapa (Visão Ampla) */}
+      {/* Container do Mapa (Visão Ampla) */}
       <div className="h-[730px] flex items-center justify-center p-8 bg-slate-50/20">
         <TooltipProvider>
           <ComposableMap
@@ -130,6 +130,21 @@ export function BrazilHeatmap() {
             }}
             style={{ width: "100%", height: "100%" }}
           >
+            {/* Definição do Gradiente Petrobras (Fidelidade Máxima) */}
+            <defs>
+              <linearGradient id="petrobrasGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#008542" />
+                <stop offset="100%" stopColor="#FFD100" />
+              </linearGradient>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+                <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+
             {/* Camada Térmica dos Estados */}
             <Geographies geography={geoUrl}>
               {({ geographies }) =>
@@ -146,7 +161,18 @@ export function BrazilHeatmap() {
                       fill={fillColor}
                       stroke="#ffffff"
                       strokeWidth={1.5}
-                      className="transition-all duration-500 hover:fill-slate-200 cursor-default outline-none"
+                      className="transition-all duration-300 cursor-pointer outline-none"
+                      style={{
+                        default: { outline: "none" },
+                        hover: { 
+                          stroke: "url(#petrobrasGradient)",
+                          strokeWidth: 4,
+                          fill: fillColor,
+                          filter: "url(#glow)",
+                          transition: "all 300ms"
+                        },
+                        pressed: { outline: "none" }
+                      }}
                     />
                   );
                 })
