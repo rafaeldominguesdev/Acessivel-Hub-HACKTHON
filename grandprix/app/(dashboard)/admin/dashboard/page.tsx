@@ -110,7 +110,7 @@ export default function AdminDashboardPage() {
 
               <div className="p-4 bg-white border border-slate-200 shadow-sm rounded-2xl space-y-2 relative overflow-hidden">
                 <p className="text-sm font-bold text-slate-800 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-[#FFD100] animate-pulse" />
                   Alerta: Barreiras Atitudinais
                 </p>
                 <p className="text-xs text-slate-600 font-medium leading-relaxed">
@@ -138,7 +138,7 @@ export default function AdminDashboardPage() {
             </CardContent>
             {/* BG Patterns */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-[#008542]/5 rounded-full blur-3xl -mr-16 -mt-16 group-hover:scale-110 transition-transform" />
-            <div className="absolute bottom-0 left-0 w-24 h-24 bg-amber-500/5 rounded-full blur-2xl -ml-12 -mb-12" />
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-[#FFD100]/10 rounded-full blur-2xl -ml-12 -mb-12" />
           </Card>
         </div>
       </div>

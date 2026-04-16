@@ -108,6 +108,21 @@
     font-variant-numeric: tabular-nums;
   }
 
+  .text-glow-warning {
+    color: var(--warning-foreground);
+    text-shadow:
+      0 0 10px rgba(255, 209, 0, 0.55),
+      0 0 24px rgba(255, 209, 0, 0.35);
+  }
+
+  .pill-glow-warning {
+    background: rgba(255, 209, 0, 0.14);
+    border-color: rgba(255, 209, 0, 0.28);
+    box-shadow:
+      0 10px 24px rgba(255, 209, 0, 0.10),
+      0 0 0 1px rgba(255, 209, 0, 0.10) inset;
+  }
+
   .sidebar-bg {
     @apply bg-slate-50 border-r border-slate-200;
   }
@@ -118,7 +133,7 @@
 
   .badge-nova { @apply bg-slate-100 text-slate-700 border-slate-200; }
   .badge-analise { @apply bg-blue-50 text-blue-700 border-blue-100; }
-  .badge-andamento { @apply bg-amber-50 text-amber-700 border-amber-100; }
+  .badge-andamento { @apply bg-[color:var(--warning)]/25 text-[color:var(--warning-foreground)] border-[color:var(--warning)]/40; }
   .badge-resolvida { @apply bg-emerald-50 text-emerald-700 border-emerald-100; }
   .badge-respondida { @apply bg-indigo-50 text-indigo-700 border-indigo-100; }
 }

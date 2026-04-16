@@ -107,25 +107,26 @@ export function Sidebar() {
       </nav>
 
       {/* Profile & Footer */}
-      <div className="mt-auto border-t border-slate-100 p-3">
-        <DropdownMenu>
-          <DropdownMenuTrigger 
-            className={cn(
-              "w-full flex items-center gap-3 py-6 rounded-xl hover:bg-slate-50 transition-all group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#008542]/20 cursor-pointer",
-              isCollapsed ? "justify-center px-0" : "justify-start px-3"
-            )}
-          >
-            <div className="w-9 h-9 rounded-full bg-[#008542]/10 border border-[#008542]/20 flex items-center justify-center text-[#008542] shrink-0 group-hover:scale-105 transition-transform">
-              <User className="w-5 h-5" />
-            </div>
-            {!isCollapsed && (
-              <div className="flex flex-col items-start overflow-hidden text-left">
-                <span className="text-sm font-bold text-slate-900 leading-none truncate w-full">Rafael Caldeira</span>
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1 truncate w-full">Gestor de UX</span>
+      <div className="mt-auto px-3 pb-4 pt-6">
+        <div className={cn("flex flex-col gap-2", isCollapsed ? "items-center" : "items-stretch")}>
+          <DropdownMenu>
+            <DropdownMenuTrigger 
+              className={cn(
+                "w-full flex items-center gap-3 py-4 rounded-2xl hover:bg-slate-50 transition-all group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#008542]/20 cursor-pointer",
+                isCollapsed ? "justify-center px-0" : "justify-start px-3"
+              )}
+            >
+              <div className="w-11 h-11 rounded-full bg-[#008542]/10 border border-[#008542]/20 flex items-center justify-center text-[#008542] shrink-0 group-hover:scale-105 transition-transform">
+                <User className="w-6 h-6" />
               </div>
-            )}
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="start" side="right" className="w-64 mb-4 rounded-2xl border-slate-200 shadow-xl p-2 animate-in slide-in-from-left-2 duration-200">
+              {!isCollapsed && (
+                <div className="flex flex-col items-start overflow-hidden text-left">
+                  <span className="text-sm font-black text-slate-900 leading-none truncate w-full">Rafael Caldeira</span>
+                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-1 truncate w-full">Gestor de UX</span>
+                </div>
+              )}
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" side="right" className="w-64 mb-4 rounded-2xl border-slate-200 shadow-xl p-2 animate-in slide-in-from-left-2 duration-200">
             <DropdownMenuLabel className="px-3 py-2 text-xs font-black uppercase tracking-widest text-slate-400">Minha Conta</DropdownMenuLabel>
             <DropdownMenuSeparator className="bg-slate-100" />
             <DropdownMenuGroup>
@@ -152,16 +153,20 @@ export function Sidebar() {
               <span className="font-black text-sm uppercase tracking-wider">Sair da Conta</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
-        </DropdownMenu>
+          </DropdownMenu>
 
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          onClick={() => setIsSidebarCollapsed(!isCollapsed)}
-          className="w-full justify-center text-slate-400 hover:text-slate-900 mt-2 h-8"
-        >
-          {isCollapsed ? <Menu className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
-        </Button>
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            onClick={() => setIsSidebarCollapsed(!isCollapsed)}
+            className={cn(
+              "w-full justify-center text-slate-400 hover:text-slate-900 h-10 rounded-2xl",
+              isCollapsed && "w-11"
+            )}
+          >
+            {isCollapsed ? <Menu className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+          </Button>
+        </div>
       </div>
     </aside>
   );

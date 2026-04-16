@@ -27,7 +27,7 @@ export const STATUS_CONFIG = {
   },
   [DemandaStatus.EM_ANDAMENTO]: {
     label: "Em Andamento",
-    color: "bg-amber-50 text-amber-700 border-amber-100",
+    color: "pill-glow-warning text-glow-warning",
   },
   [DemandaStatus.RESOLVIDA]: {
     label: "Resolvida",

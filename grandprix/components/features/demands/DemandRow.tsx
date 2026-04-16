@@ -58,13 +58,13 @@ export function DemandRow({ demanda, isAdmin = false }: DemandRowProps) {
             </div>
 
             {isAdmin && demanda.aiAnalysis?.solucaoHistorica && (
-              <div className="mt-2 bg-amber-50/50 border border-amber-200/50 p-2 rounded-lg flex gap-2 items-start mt-2 w-fit">
-                 <Sparkles className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+              <div className="mt-2 bg-[#FFD100]/15 border border-[#FFD100]/35 p-2 rounded-lg flex gap-2 items-start mt-2 w-fit">
+                 <Sparkles className="w-4 h-4 text-[#FFD100] shrink-0 mt-0.5" />
                  <div>
-                   <p className="text-[11px] font-black uppercase text-amber-700 tracking-widest leading-none">Recomendação IA (Solução Testada)</p>
-                   <p className="text-xs font-medium text-amber-900 mt-1">Baseado em: {demanda.aiAnalysis.solucaoHistorica.titulo}</p>
+                   <p className="text-[11px] font-black uppercase text-[#003D29] tracking-widest leading-none">Recomendação (Solução Testada)</p>
+                   <p className="text-xs font-medium text-slate-900 mt-1">Baseado em: {demanda.aiAnalysis.solucaoHistorica.titulo}</p>
                    {demanda.aiAnalysis.solucaoHistorica.norma && (
-                     <p className="text-[10px] text-amber-700 font-bold mt-1">Norma Aplicável: {demanda.aiAnalysis.solucaoHistorica.norma}</p>
+                     <p className="text-[10px] text-[#003D29] font-bold mt-1">Norma Aplicável: {demanda.aiAnalysis.solucaoHistorica.norma}</p>
                    )}
                  </div>
               </div>

@@ -21,7 +21,7 @@ const geoUrl = "/brazil.json";
 // Cores Institucionais Refinadas
 const STATUS_COLORS = {
   STABLE: "#10b981",    
-  ATTENTION: "#f59e0b",  
+  ATTENTION: "#FFD100",  
   CRITICAL: "#ef4444",   
   EMPTY: "#f1f5f9"       
 };
@@ -102,7 +102,7 @@ export function BrazilHeatmap() {
 
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-3 h-3 rounded-full bg-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.4)]" />
+                <div className="w-3 h-3 rounded-full bg-[#FFD100] shadow-[0_0_12px_rgba(255,209,0,0.45)]" />
                 <span className="text-sm font-black text-slate-700 uppercase tracking-tight">Atenção</span>
               </div>
               <span className="text-xs font-bold text-slate-400 bg-slate-50 px-2 py-0.5 rounded-md">2-9 DEM.</span>

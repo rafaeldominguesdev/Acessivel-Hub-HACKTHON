@@ -13,7 +13,7 @@ export function DemandBadge({ status }: DemandBadgeProps) {
     <Badge
       variant="outline"
       className={cn(
-        "rounded-full uppercase text-[10px] font-black tracking-widest px-3 py-0.5",
+        "relative isolate rounded-full uppercase text-[10px] font-black tracking-widest px-3 py-0.5",
         config.color
       )}
     >
