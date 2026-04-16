@@ -126,19 +126,164 @@ export function LoginForm() {
           align-items: center;
           justify-content: center;
           font-family: 'Montserrat', sans-serif;
-          background: radial-gradient(ellipse at 30% 20%, #1a5c38 0%, #0a2e1a 40%, #04111a 100%);
+          background: #021a0d;
           position: relative;
           overflow: hidden;
         }
 
-        .orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; }
-        .orb-1 { width:500px;height:500px;top:-100px;left:-100px;background:radial-gradient(circle,rgba(0,127,63,.5) 0%,transparent 70%); }
-        .orb-2 { width:400px;height:400px;bottom:-80px;right:-80px;background:radial-gradient(circle,rgba(0,80,40,.6) 0%,transparent 70%); }
-        .orb-3 { width:300px;height:300px;top:30%;right:15%;background:radial-gradient(circle,rgba(255,198,50,.12) 0%,transparent 70%);filter:blur(60px); }
-        .orb-4 { width:200px;height:200px;top:10%;left:30%;background:radial-gradient(circle,rgba(0,180,90,.2) 0%,transparent 70%);filter:blur(50px); }
+        /* Blobs animados */
+        .blob-animated {
+          position: absolute;
+          border-radius: 50%;
+          pointer-events: none;
+          will-change: transform, opacity;
+        }
 
-        .bokeh { position:absolute;border-radius:50%;pointer-events:none;animation:float 8s ease-in-out infinite; }
-        @keyframes float { 0%,100%{transform:translateY(0) scale(1);opacity:.6} 50%{transform:translateY(-18px) scale(1.05);opacity:.9} }
+        /* ── 8 blobs cobrindo todos os cantos + centro ── */
+
+        /* Canto superior esquerdo — verde */
+        .b1 {
+          width: 600px; height: 600px;
+          background: radial-gradient(circle, rgba(0,200,80,0.95) 0%, transparent 70%);
+          filter: blur(85px);
+          top: -200px; left: -200px;
+          animation: moveA 15s ease-in-out infinite alternate, glowG 6s ease-in-out infinite alternate;
+        }
+
+        /* Canto superior direito — amarelo */
+        .b2 {
+          width: 550px; height: 550px;
+          background: radial-gradient(circle, rgba(255,210,0,0.9) 0%, transparent 70%);
+          filter: blur(80px);
+          top: -180px; right: -180px;
+          animation: moveB 18s ease-in-out infinite alternate, glowY 7s ease-in-out infinite alternate;
+          animation-delay: 0s, 1.5s;
+        }
+
+        /* Canto inferior esquerdo — amarelo */
+        .b3 {
+          width: 580px; height: 580px;
+          background: radial-gradient(circle, rgba(255,190,0,0.85) 0%, transparent 70%);
+          filter: blur(90px);
+          bottom: -200px; left: -180px;
+          animation: moveC 20s ease-in-out infinite alternate, glowY 8s ease-in-out infinite alternate;
+          animation-delay: 0s, 3s;
+        }
+
+        /* Canto inferior direito — verde */
+        .b4 {
+          width: 600px; height: 600px;
+          background: radial-gradient(circle, rgba(0,180,70,0.9) 0%, transparent 70%);
+          filter: blur(85px);
+          bottom: -200px; right: -200px;
+          animation: moveD 17s ease-in-out infinite alternate, glowG 5s ease-in-out infinite alternate;
+          animation-delay: 0s, 2s;
+        }
+
+        /* Centro — branco pulsante */
+        .b5 {
+          width: 500px; height: 500px;
+          background: radial-gradient(circle, rgba(255,255,255,0.85) 0%, transparent 65%);
+          filter: blur(100px);
+          top: 50%; left: 50%;
+          transform: translate(-50%, -50%);
+          animation: pulse 5s ease-in-out infinite alternate, glowW 5s ease-in-out infinite alternate;
+        }
+
+        /* Centro esquerda — verde claro */
+        .b6 {
+          width: 450px; height: 450px;
+          background: radial-gradient(circle, rgba(0,220,100,0.8) 0%, transparent 70%);
+          filter: blur(75px);
+          top: 30%; left: -100px;
+          animation: moveA 22s ease-in-out infinite alternate, glowG 9s ease-in-out infinite alternate;
+          animation-delay: 0s, 4s;
+        }
+
+        /* Centro direita — amarelo */
+        .b7 {
+          width: 450px; height: 450px;
+          background: radial-gradient(circle, rgba(255,220,0,0.8) 0%, transparent 70%);
+          filter: blur(80px);
+          top: 40%; right: -100px;
+          animation: moveB 19s ease-in-out infinite alternate, glowY 6s ease-in-out infinite alternate;
+          animation-delay: 0s, 5s;
+        }
+
+        /* Centro topo — branco */
+        .b8 {
+          width: 400px; height: 400px;
+          background: radial-gradient(circle, rgba(255,255,255,0.75) 0%, transparent 65%);
+          filter: blur(95px);
+          top: -80px; left: 35%;
+          animation: moveC 16s ease-in-out infinite alternate, glowW 7s ease-in-out infinite alternate;
+          animation-delay: 0s, 2.5s;
+        }
+
+        /* Centro baixo — branco */
+        .b9 {
+          width: 400px; height: 400px;
+          background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, transparent 65%);
+          filter: blur(95px);
+          bottom: -80px; left: 40%;
+          animation: moveD 21s ease-in-out infinite alternate, glowW 6s ease-in-out infinite alternate;
+          animation-delay: 0s, 3.5s;
+        }
+
+        /* ── Movimentos ── */
+        @keyframes moveA {
+          0%   { transform: translate(0,0) scale(1); }
+          50%  { transform: translate(100px,80px) scale(1.1); }
+          100% { transform: translate(60px,160px) scale(0.95); }
+        }
+        @keyframes moveB {
+          0%   { transform: translate(0,0) scale(1); }
+          50%  { transform: translate(-90px,-80px) scale(1.15); }
+          100% { transform: translate(-60px,-150px) scale(0.9); }
+        }
+        @keyframes moveC {
+          0%   { transform: translate(0,0) scale(1); }
+          50%  { transform: translate(80px,-100px) scale(1.2); }
+          100% { transform: translate(-80px,80px) scale(0.85); }
+        }
+        @keyframes moveD {
+          0%   { transform: translate(0,0) scale(1); }
+          50%  { transform: translate(-100px,80px) scale(1.1); }
+          100% { transform: translate(80px,-60px) scale(0.9); }
+        }
+        @keyframes pulse {
+          0%   { transform: translate(-50%,-50%) scale(0.9); }
+          50%  { transform: translate(-50%,-50%) scale(1.15); }
+          100% { transform: translate(-50%,-50%) scale(0.95); }
+        }
+
+        /* ── Brilhos pulsantes ── */
+        @keyframes glowG {
+          0%   { opacity: 0.3; filter: blur(85px) brightness(0.9); }
+          50%  { opacity: 0.8; filter: blur(65px) brightness(1.5); }
+          100% { opacity: 0.4; filter: blur(90px) brightness(1.0); }
+        }
+        @keyframes glowY {
+          0%   { opacity: 0.25; filter: blur(90px) brightness(0.8); }
+          50%  { opacity: 0.75; filter: blur(70px) brightness(1.6); }
+          100% { opacity: 0.35; filter: blur(95px) brightness(1.0); }
+        }
+        @keyframes glowW {
+          0%   { opacity: 0.08; filter: blur(100px) brightness(1.0); }
+          50%  { opacity: 0.5;  filter: blur(75px) brightness(2.2); }
+          100% { opacity: 0.12; filter: blur(105px) brightness(1.2); }
+        }
+
+        /* Blur overlay — foco no card */
+        .blur-overlay {
+          position: absolute;
+          inset: 0;
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          background: rgba(2, 14, 6, 0.22);
+          pointer-events: none;
+          z-index: 3;
+        }
 
         /* Card */
         .glass-card {
@@ -269,92 +414,23 @@ export function LoginForm() {
       `}</style>
 
       <div className="gl-root">
-        {/* SVG decorativo de fundo — identidade Petrobras */}
-        <svg
-          style={{ position:"absolute", inset:0, width:"100%", height:"100%", pointerEvents:"none", zIndex:1 }}
-          viewBox="0 0 1440 900"
-          preserveAspectRatio="xMidYMid slice"
-        >
-          <defs>
-            <pattern id="hex-pattern" x="0" y="0" width="80" height="92" patternUnits="userSpaceOnUse">
-              <polygon points="40,2 78,22 78,70 40,90 2,70 2,22"
-                fill="none" stroke="rgba(255,198,50,0.055)" strokeWidth="1" />
-            </pattern>
-            <radialGradient id="fade-center" cx="50%" cy="50%" r="55%">
-              <stop offset="0%" stopColor="rgba(4,17,26,0)" />
-              <stop offset="100%" stopColor="rgba(4,17,26,0.8)" />
-            </radialGradient>
-          </defs>
+        {/* 9 blobs cobrindo toda a tela — verde, amarelo e branco */}
+        <div className="blob-animated b1" />
+        <div className="blob-animated b2" />
+        <div className="blob-animated b3" />
+        <div className="blob-animated b4" />
+        <div className="blob-animated b5" />
+        <div className="blob-animated b6" />
+        <div className="blob-animated b7" />
+        <div className="blob-animated b8" />
+        <div className="blob-animated b9" />
 
-          {/* Grid hexágonos */}
-          <rect width="1440" height="900" fill="url(#hex-pattern)" />
-          <rect width="1440" height="900" fill="url(#fade-center)" />
+        {/* Blur overlay — suaviza o fundo e dá foco ao card */}
+        <div className="blur-overlay" />
 
-          {/* Linhas diagonais sutis */}
-          <line x1="0" y1="0" x2="380" y2="900" stroke="rgba(255,198,50,0.04)" strokeWidth="1.5" />
-          <line x1="1440" y1="0" x2="1060" y2="900" stroke="rgba(0,127,63,0.06)" strokeWidth="1.5" />
 
-          {/* Círculos concêntricos canto superior direito */}
-          <circle cx="1360" cy="60" r="200" fill="none" stroke="rgba(255,198,50,0.06)" strokeWidth="1.5" />
-          <circle cx="1360" cy="60" r="130" fill="none" stroke="rgba(255,198,50,0.04)" strokeWidth="1" />
-          <circle cx="1360" cy="60" r="60"  fill="none" stroke="rgba(255,198,50,0.03)" strokeWidth="1" />
 
-          {/* Círculos concêntricos canto inferior esquerdo */}
-          <circle cx="80" cy="840" r="160" fill="none" stroke="rgba(0,127,63,0.09)" strokeWidth="1.5" />
-          <circle cx="80" cy="840" r="90"  fill="none" stroke="rgba(0,127,63,0.05)" strokeWidth="1" />
 
-          {/* Símbolo Petrobras inline — canto inferior direito */}
-          <g transform="translate(1130, 580)" opacity="0.07">
-            {/* Forma do símbolo P da Petrobras simplificado */}
-            <circle cx="80" cy="80" r="78" fill="none" stroke="white" strokeWidth="12" />
-            <circle cx="80" cy="80" r="50" fill="none" stroke="white" strokeWidth="8" />
-            <rect x="68" y="2" width="24" height="78" fill="white" rx="4" />
-            <text x="80" y="190" textAnchor="middle" fill="white" fontFamily="Arial, sans-serif"
-              fontSize="22" fontWeight="700" letterSpacing="4">PETROBRAS</text>
-          </g>
-
-          {/* Símbolo menor — canto superior esquerdo */}
-          <g transform="translate(30, 30)" opacity="0.05">
-            <circle cx="50" cy="50" r="46" fill="none" stroke="white" strokeWidth="7" />
-            <circle cx="50" cy="50" r="28" fill="none" stroke="white" strokeWidth="5" />
-            <rect x="43" y="4" width="14" height="46" fill="white" rx="2" />
-          </g>
-
-          {/* Detalhes pequenos */}
-          <line x1="200" y1="150" x2="200" y2="200" stroke="rgba(255,198,50,0.2)" strokeWidth="1.5" strokeLinecap="round" />
-          <line x1="175" y1="175" x2="225" y2="175" stroke="rgba(255,198,50,0.2)" strokeWidth="1.5" strokeLinecap="round" />
-          <circle cx="330" cy="80" r="2.5" fill="rgba(255,198,50,0.3)" />
-          <circle cx="348" cy="80" r="2.5" fill="rgba(255,198,50,0.2)" />
-          <circle cx="366" cy="80" r="2.5" fill="rgba(255,198,50,0.12)" />
-        </svg>
-
-        {/* Logo Petrobras inline — canto inferior direito (grande) */}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 192.756 192.756"
-          aria-hidden="true"
-          style={{ position:"absolute", bottom:"5%", right:"5%", width:220, opacity:0.1, pointerEvents:"none", zIndex:2 }}
-        >
-          <g fillRule="evenodd" clipRule="evenodd">
-            <path fill="rgba(255,255,255,0.6)" d="M57.218 86.127h14.549c2.889 0 5.51 1.855 5.51 4.914 0 4.125-3.288 7.009-7.846 7.009H53.857l3.361-11.923zM128.797 86.205h13.748c6.516 0 6.775 4.429 6.775 5.69 0 2.946-2.594 8.735-10.504 8.735H124.81c.001.001 3.913-14.072 3.987-14.425zM50.339 110.434h12.58c6.16 0 6.51 1.672 7.358 3.104.844 1.424.455 4.432-.129 5.469-.735 1.303-1.979 5.336-9.856 5.336H46.318c0-.001 4.014-13.892 4.021-13.909z"/>
-            <path fill="rgba(255,255,255,0.6)" d="M183.297 73.233v110.579H8.742V73.233h33.589l-18.61 64.372h38.096c16.502 0 19.377-3.857 22.727-6.664 4.475-3.752 6.872-12.682 4.863-18.893-1.421-4.393-5.576-7.051-6.029-7.18 5.155-2.395 8.156-7.639 8.526-8.412 1.913-3.978 3.396-11.184-1.361-16.982-3.956-4.818-11.64-6.146-17.216-6.242h40.787l-18.675 64.501h18.901l6.904-24.455h10.797c7.846 0 7.133 4.883 7.328 6.988l.615 17.984 17.553-.006s-.791-20.182-.859-21.662c-.232-5.182-3.67-7.52-6.598-7.52 5.623-1.521 10.502-6.627 12.455-9.896 2.25-3.774 3.943-9.781 1.719-15.742-3.232-8.653-11.559-10.091-17.377-10.193h36.42v.002z"/>
-            <path fill="rgba(255,198,50,0.7)" d="M8.742 52.09h174.555V9.809H8.742V52.09z"/>
-          </g>
-        </svg>
-
-        {/* Logo Petrobras inline — canto superior esquerdo (pequena) */}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 192.756 192.756"
-          aria-hidden="true"
-          style={{ position:"absolute", top:"5%", left:"4%", width:110, opacity:0.07, pointerEvents:"none", zIndex:2 }}
-        >
-          <g fillRule="evenodd" clipRule="evenodd">
-            <path fill="rgba(255,255,255,0.6)" d="M57.218 86.127h14.549c2.889 0 5.51 1.855 5.51 4.914 0 4.125-3.288 7.009-7.846 7.009H53.857l3.361-11.923zM128.797 86.205h13.748c6.516 0 6.775 4.429 6.775 5.69 0 2.946-2.594 8.735-10.504 8.735H124.81c.001.001 3.913-14.072 3.987-14.425zM50.339 110.434h12.58c6.16 0 6.51 1.672 7.358 3.104.844 1.424.455 4.432-.129 5.469-.735 1.303-1.979 5.336-9.856 5.336H46.318c0-.001 4.014-13.892 4.021-13.909z"/>
-            <path fill="rgba(255,255,255,0.6)" d="M183.297 73.233v110.579H8.742V73.233h33.589l-18.61 64.372h38.096c16.502 0 19.377-3.857 22.727-6.664 4.475-3.752 6.872-12.682 4.863-18.893-1.421-4.393-5.576-7.051-6.029-7.18 5.155-2.395 8.156-7.639 8.526-8.412 1.913-3.978 3.396-11.184-1.361-16.982-3.956-4.818-11.64-6.146-17.216-6.242h40.787l-18.675 64.501h18.901l6.904-24.455h10.797c7.846 0 7.133 4.883 7.328 6.988l.615 17.984 17.553-.006s-.791-20.182-.859-21.662c-.232-5.182-3.67-7.52-6.598-7.52 5.623-1.521 10.502-6.627 12.455-9.896 2.25-3.774 3.943-9.781 1.719-15.742-3.232-8.653-11.559-10.091-17.377-10.193h36.42v.002z"/>
-            <path fill="rgba(255,198,50,0.7)" d="M8.742 52.09h174.555V9.809H8.742V52.09z"/>
-          </g>
-        </svg>
 
         <div className="top-logo">
           <div className="logo-badge">PB</div>
