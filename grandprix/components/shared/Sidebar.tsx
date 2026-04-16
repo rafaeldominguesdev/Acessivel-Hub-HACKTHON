@@ -61,7 +61,7 @@ export function Sidebar() {
   return (
     <aside 
       className={cn(
-        "bg-white border-r border-slate-200 h-[calc(100vh-64px)] sticky top-16 transition-all duration-300 flex flex-col z-20",
+        "bg-white border-r border-slate-200 h-[calc(100vh-64px)] sticky top-16 transition-[width] duration-500 ease-out flex flex-col z-20",
         isCollapsed ? "w-20" : "w-64"
       )}
     >
@@ -83,7 +83,7 @@ export function Sidebar() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "flex items-center py-2 rounded-lg text-sm font-medium transition-all group relative",
+                    "flex items-center py-2 rounded-lg text-sm font-medium transition-colors duration-500 ease-out group relative",
                     isCollapsed ? "justify-center" : "justify-start px-3 gap-3",
                     isActive 
                       ? "bg-slate-100 text-[#008542]" 
@@ -112,7 +112,7 @@ export function Sidebar() {
           <DropdownMenu>
             <DropdownMenuTrigger 
               className={cn(
-                "w-full flex items-center gap-3 py-4 rounded-2xl hover:bg-slate-50 transition-all group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#008542]/20 cursor-pointer",
+                "w-full flex items-center gap-3 py-4 rounded-2xl hover:bg-slate-50 transition-colors duration-500 ease-out group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#008542]/20 cursor-pointer",
                 isCollapsed ? "justify-center px-0" : "justify-start px-3"
               )}
             >

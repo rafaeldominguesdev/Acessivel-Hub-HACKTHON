@@ -49,7 +49,7 @@ export default function UserDemandListPage() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input 
             placeholder="Pesquisar por título ou ID..." 
-            className="w-full bg-slate-50 border-none rounded-xl py-2.5 pl-10 pr-4 text-xs font-bold text-slate-600 focus:bg-white focus:ring-1 focus:ring-[#008542]/20 transition-all outline-none"
+            className="w-full bg-slate-50 border-none rounded-xl py-2.5 pl-10 pr-4 text-xs font-bold text-slate-600 focus:bg-white focus:ring-1 focus:ring-[#008542]/20 transition-colors duration-500 ease-out outline-none"
           />
         </div>
         <div className="flex items-center gap-2">

@@ -231,7 +231,7 @@ export function DemandForm() {
                           <Input
                             placeholder="Ex.: Sistema interno não funciona com leitor de tela"
                             {...field}
-                            className="h-12 bg-slate-50 border-slate-200 focus:bg-white transition-all rounded-xl"
+                            className="h-12 bg-slate-50 border-slate-200 focus:bg-white transition-colors duration-500 ease-out rounded-xl"
                           />
                         </FormControl>
                         <FormMessage />
@@ -248,7 +248,7 @@ export function DemandForm() {
                         <FormControl>
                           <Textarea 
                             placeholder="Descreva a situação, o local exato e o impacto observado..." 
-                            className="min-h-[240px] bg-slate-50 border-slate-200 focus:bg-white transition-all resize-none rounded-xl"
+                            className="min-h-[240px] bg-slate-50 border-slate-200 focus:bg-white transition-colors duration-500 ease-out resize-none rounded-xl"
                             {...field} 
                           />
                         </FormControl>
@@ -273,8 +273,8 @@ export function DemandForm() {
                   )}
 
                   <div className="pt-2">
-                    <div className="flex items-center gap-4 p-4 border border-dashed border-slate-200 rounded-2xl bg-slate-50 hover:bg-white transition-all cursor-pointer group">
-                      <div className="p-2 rounded-xl bg-slate-200 group-hover:bg-[#008542]/10 group-hover:text-[#008542] transition-all">
+                    <div className="flex items-center gap-4 p-4 border border-dashed border-slate-200 rounded-2xl bg-slate-50 hover:bg-white transition-colors duration-500 ease-out cursor-pointer group">
+                      <div className="p-2 rounded-xl bg-slate-200 group-hover:bg-[#008542]/10 group-hover:text-[#008542] transition-colors duration-500 ease-out">
                         <Paperclip className="w-5 h-5" />
                       </div>
                       <div className="flex-1">
@@ -366,7 +366,7 @@ export function DemandForm() {
                                 key={tipo}
                                 onClick={() => field.onChange(tipo)}
                                 className={cn(
-                                  "flex items-center gap-3 p-3 rounded-2xl border-2 transition-all cursor-pointer group h-12",
+                                  "flex items-center gap-3 p-3 rounded-2xl border-2 transition-colors duration-500 ease-out cursor-pointer group h-12",
                                   isSelected 
                                     ? "border-[#008542] bg-[#008542]/5" 
                                     : "border-slate-100 hover:border-slate-300 bg-white"

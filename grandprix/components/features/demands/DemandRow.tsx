@@ -24,7 +24,7 @@ export function DemandRow({ demanda, isAdmin = false }: DemandRowProps) {
     : `/user/demandas/${demanda.id}`;
 
   return (
-    <div className="group relative bg-white border border-slate-200 rounded-xl p-5 hover:border-primary/30 hover:shadow-md transition-all duration-200">
+    <div className="group relative bg-white border border-slate-200 rounded-xl p-5 hover:border-primary/30 hover:shadow-md transition-colors transition-shadow duration-500 ease-out">
       <div className="flex items-start gap-4">
         {/* Avatar Lado Esquerdo */}
         <Avatar className="h-10 w-10 border-2 border-slate-50 shadow-sm">
@@ -38,7 +38,7 @@ export function DemandRow({ demanda, isAdmin = false }: DemandRowProps) {
           <div className="flex flex-col gap-1">
             <Link 
               href={detailHref}
-              className="text-base font-bold text-slate-900 hover:text-primary transition-colors truncate"
+              className="text-base font-bold text-slate-900 hover:text-primary transition-colors duration-500 ease-out truncate"
             >
               {demanda.titulo}
             </Link>

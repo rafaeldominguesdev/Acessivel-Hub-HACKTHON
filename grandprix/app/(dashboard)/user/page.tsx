@@ -91,7 +91,7 @@ export default function UserDashboardPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((stat, idx) => (
-          <Card key={idx} className="border-slate-200 shadow-sm hover:shadow-md transition-all group overflow-hidden border-b-4 border-b-transparent hover:border-b-[#008542]">
+          <Card key={idx} className="border-slate-200 shadow-sm hover:shadow-md transition-shadow transition-colors duration-500 ease-out group overflow-hidden border-b-4 border-b-transparent hover:border-b-[#008542]">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
               <CardTitle className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
                 {stat.title}
@@ -122,7 +122,7 @@ export default function UserDashboardPage() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
             <input 
               placeholder="Filtrar meus relatos..." 
-              className="bg-slate-100 border-none rounded-full py-2 pl-9 pr-4 text-xs font-bold text-slate-600 focus:bg-white focus:ring-1 focus:ring-[#008542]/20 transition-all outline-none"
+              className="bg-slate-100 border-none rounded-full py-2 pl-9 pr-4 text-xs font-bold text-slate-600 focus:bg-white focus:ring-1 focus:ring-[#008542]/20 transition-colors duration-500 ease-out outline-none"
             />
           </div>
         </div>
@@ -148,7 +148,7 @@ export default function UserDashboardPage() {
         <Button className="bg-white text-[#008542] hover:bg-slate-100 font-black uppercase tracking-[0.2em] text-xs h-14 px-10 shadow-xl relative z-10 whitespace-nowrap">
           Central de Ajuda
         </Button>
-        <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-white/5 rounded-full blur-3xl transition-transform group-hover:scale-110" />
+        <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-white/5 rounded-full blur-3xl transition-transform duration-500 ease-out group-hover:scale-110" />
       </div>
     </div>
   );

@@ -161,14 +161,13 @@ export function BrazilHeatmap() {
                       fill={fillColor}
                       stroke="#ffffff"
                       strokeWidth={1.5}
-                      className="transition-all duration-300 cursor-pointer outline-none"
+                      className="transition-[stroke,stroke-width] duration-500 ease-out cursor-pointer outline-none"
                       style={{
                         default: { outline: "none" },
                         hover: { 
                           stroke: "url(#petrobrasGradient)",
                           strokeWidth: 4,
                           fill: fillColor,
-                          filter: "url(#glow)",
                           transition: "all 300ms"
                         },
                         pressed: { outline: "none" }
@@ -191,12 +190,12 @@ export function BrazilHeatmap() {
                         <circle
                           r={markerSize + 5}
                           fill="rgba(255,255,255,0.4)"
-                          className="animate-pulse"
+                          opacity={0.6}
                         />
                         <circle
                           r={markerSize}
                           fill="#0f172a"
-                          className="stroke-white stroke-[2.5px] transition-all duration-300 group-hover/marker:scale-125 shadow-2xl"
+                          className="stroke-white stroke-[2.5px] transition-transform duration-500 ease-out group-hover/marker:scale-125"
                         />
                       </g>
                     </TooltipTrigger>
