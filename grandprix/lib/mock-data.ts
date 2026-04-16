@@ -4,22 +4,48 @@ import { DemandaStatus, TipoBarreira } from '@/lib/constants';
 // Mapeamento de Unidade para Estado (Sigla para combinar com GeoJSON)
 export const UNIT_TO_STATE: Record<string, string> = {
   "EDISE - Rio de Janeiro": "RJ",
+  "CENPES - Rio": "RJ",
+  "REDUC - Duque de Caxias": "RJ",
   "Refinaria REPLAN": "SP",
   "RPBC - Cubatão": "SP",
+  "RECAP - Capuava": "SP",
+  "REVAP - São José dos Campos": "SP",
   "REGAP - Betim": "MG",
   "RLAM - Mataripe": "BA",
+  "REPAR - Araucária": "PR",
+  "RNEST - Abreu e Lima": "PE",
   "LUBNOR - Fortaleza": "CE",
-  "CENPES - Rio": "RJ",
+  "REFAP - Canoas": "RS",
+  "REMAN - Manaus": "AM",
+  "Urucu - Coari": "AM",
+  "Polo Onshore RN": "RN",
+  "Terminais ES": "ES",
+  "Terminais SC": "SC",
+  "Polo Logístico PA": "PA",
+  "UO-SEAL": "SE",
 };
 
 const UNIT_LOCATIONS: Record<string, [number, number]> = {
   "EDISE - Rio de Janeiro": [-22.9068, -43.1729],
+  "CENPES - Rio": [-22.8596, -43.2323],
+  "REDUC - Duque de Caxias": [-22.7153, -43.2797],
   "Refinaria REPLAN": [-22.7610, -47.1539],
   "RPBC - Cubatão": [-23.8906, -46.4258],
+  "RECAP - Capuava": [-23.6333, -46.5000],
+  "REVAP - São José dos Campos": [-23.1791, -45.8872],
   "REGAP - Betim": [-19.9702, -44.1534],
   "RLAM - Mataripe": [-12.6953, -38.5632],
+  "REPAR - Araucária": [-25.5947, -49.3875],
+  "RNEST - Abreu e Lima": [-8.4042, -34.9667],
   "LUBNOR - Fortaleza": [-3.7166, -38.4831],
-  "CENPES - Rio": [-22.8596, -43.2323],
+  "REFAP - Canoas": [-29.9167, -51.1833],
+  "REMAN - Manaus": [-3.1347, -59.9431],
+  "Urucu - Coari": [-4.8667, -65.0333],
+  "Polo Onshore RN": [-5.1878, -37.3444],
+  "Terminais ES": [-20.3155, -40.3128],
+  "Terminais SC": [-26.2425, -48.6369],
+  "Polo Logístico PA": [-1.4558, -48.4902],
+  "UO-SEAL": [-10.9472, -37.0731],
 };
 
 export const mockUsers: User[] = [
@@ -109,143 +135,214 @@ export const mockRespostas: Resposta[] = [
 
 // Gerar demandas extras simulando a triagem de IA
 const generateMockDemandas = (): Demanda[] => {
-  const base: Demanda[] = [
-    {
-      id: '1',
-      titulo: 'Subestimação da minha capacidade analítica (Capacitismo)',
-      descricao: 'Meu gestor consistentemente repassa tarefas de alta complexidade para outros colegas, acreditando que por causa da minha deficiência visual não consigo entregar planilhas avançadas, mesmo eu usando leitor de tela proficientemente.',
+  const base: Demanda[] = [];
+
+  // 1. CRÍTICOS (RED, 10+ demandas) -> RJ e SP
+  // RJ (EDISE + CENPES) = 15
+  for (let i = 1; i <= 15; i++) {
+    base.push({
+      id: `rj-${i}`,
+      titulo: `Inconsistência de Acessibilidade RJ #${i}`,
+      descricao: 'Barreira identificada durante monitoramento de rotina na unidade.',
       status: DemandaStatus.EM_ANDAMENTO,
       prioridade: 'ALTA',
       categoria: { id: 'c3', nome: 'Cultura e Liderança' },
       tipoBarreira: { id: 'b3', slug: TipoBarreira.COMUNICACIONAL, nome: 'Atitudinal (Comportamental)' },
-      unidade: 'EDISE - Rio de Janeiro',
+      unidade: i % 2 === 0 ? 'EDISE - Rio de Janeiro' : 'CENPES - Rio',
       autor: mockUsers[3], // Rafael Caldeira (ID 4)
-      respostas: mockRespostas,
-      votos: 34,
-      createdAt: '2024-04-01T10:00:00Z',
-      updatedAt: '2024-04-03T14:30:00Z',
-      coordinates: UNIT_LOCATIONS["EDISE - Rio de Janeiro"],
-      aiAnalysis: {
-        suggestedArea: 'Recursos Humanos / Diversidade',
-        confidence: 0.96,
-        isAttitudinal: true,
-        summary: 'Relato claro de capacitismo e subestimação por liderança.',
-        solucaoHistorica: {
-          titulo: 'Trilha Anti-Capacitismo Lideranças 2023',
-          norma: 'Política de Diversidade 4.1',
-          link: '#'
-        }
-      }
-    },
-    {
-      id: '2',
-      titulo: 'Sistema SAP Inacessível via NVDA',
-      descricao: 'Após a última atualização do ERP, os menus suspensos pararam de ser lidos pelo software NVDA, impossibilitando a aprovação de ordens de serviço por pessoas cegas.',
-      status: DemandaStatus.NOVO,
-      prioridade: 'URGENTE',
-      categoria: { id: 'c2', nome: 'Sistemas Digitais' },
-      tipoBarreira: { id: 'b2', slug: TipoBarreira.TECNOLOGICA, nome: 'Tecnológica' },
-      unidade: 'Refinaria REPLAN',
+      respostas: [],
+      votos: Math.floor(Math.random() * 20),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      coordinates: UNIT_LOCATIONS[i % 2 === 0 ? 'EDISE - Rio de Janeiro' : 'CENPES - Rio'],
+      aiAnalysis: { suggestedArea: 'Gestão de Pessoas', confidence: 0.9 }
+    });
+  }
+
+  // SP (REPLAN + RPBC) = 12
+  for (let i = 1; i <= 12; i++) {
+    base.push({
+      id: `sp-${i}`,
+      titulo: `Barreira de Infraestrutura SP #${i}`,
+      descricao: 'Necessidade de adequação física conforme NBR 9050.',
+      status: DemandaStatus.NOVA,
+      prioridade: 'ALTA',
+      categoria: { id: 'c0', nome: 'Infraestrutura' },
+      tipoBarreira: { id: 'b1', slug: TipoBarreira.ARQUITETONICA, nome: 'Arquitetônica' },
+      unidade: i % 2 === 0 ? 'Refinaria REPLAN' : 'RPBC - Cubatão',
       autor: mockUsers[1],
       respostas: [],
-      votos: 89,
-      createdAt: '2024-04-05T08:15:00Z',
-      updatedAt: '2024-04-05T08:15:00Z',
-      coordinates: UNIT_LOCATIONS["Refinaria REPLAN"],
-      aiAnalysis: {
-        suggestedArea: 'TIC (Tecnologia da Informação)',
-        confidence: 0.99,
-        clusterId: 'CLUSTER-SAP-2024',
-        summary: 'Perda de compatibilidade ERP x Leitor de Tela',
-        solucaoHistorica: {
-          titulo: 'Adequação Portal Jurídico para NVDA',
-          norma: 'WCAG 2.1 AA / NR-17',
-          link: '#'
-        }
-      },
-      iniciativaVinculada: {
-        id: 'ini-sap-24',
-        nome: 'Acessibilidade ERP Nacional',
-        status: 'EM_PLANEJAMENTO'
-      }
-    },
-    {
-      id: '3',
-      titulo: 'Ausência de Intérprete de Libras no Integra',
-      descricao: 'Os vídeos obrigatórios de integração de SMS continuam sendo divulgados sem tradução para Libras, limitando a compreensão de medidas de segurança fundamentais.',
-      status: DemandaStatus.EM_ANDAMENTO,
-      prioridade: 'ALTA',
+      votos: Math.floor(Math.random() * 10),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      coordinates: UNIT_LOCATIONS[i % 2 === 0 ? 'Refinaria REPLAN' : 'RPBC - Cubatão'],
+      aiAnalysis: { suggestedArea: 'Infraestrutura', confidence: 0.95 }
+    });
+  }
+
+  // 2. ATENÇÃO (YELLOW, 2-9 demandas) -> BA e PR
+  // BA (RLAM) = 5
+  for (let i = 1; i <= 5; i++) {
+    base.push({
+      id: `ba-${i}`,
+      titulo: `Evento de Treinamento BA #${i}`,
+      descricao: 'Demanda de capacitação em acessibilidade solicitada pela unidade.',
+      status: DemandaStatus.NOVA,
+      prioridade: 'MEDIA',
       categoria: { id: 'c1', nome: 'Treinamentos' },
       tipoBarreira: { id: 'b3', slug: TipoBarreira.COMUNICACIONAL, nome: 'Comunicacional' },
       unidade: 'RLAM - Mataripe',
       autor: mockUsers[2],
       respostas: [],
-      votos: 15,
-      createdAt: '2024-04-10T09:00:00Z',
-      updatedAt: '2024-04-10T09:00:00Z',
-      coordinates: UNIT_LOCATIONS["RLAM - Mataripe"],
-      aiAnalysis: {
-        suggestedArea: 'Educação Corporativa / SMS',
-        confidence: 0.92,
-        summary: 'Falta de conteúdo em Libras em curso obrigatório.'
-      }
-    },
-  ];
+      votos: 2,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      coordinates: UNIT_LOCATIONS['RLAM - Mataripe'],
+      aiAnalysis: { suggestedArea: 'Treinamento', confidence: 0.85 }
+    });
+  }
 
-  // Injetar mais demandas para simular impacto (RJ)
-  for (let i = 4; i <= 15; i++) {
+  // PR (REPAR) = 4
+  for (let i = 1; i <= 4; i++) {
     base.push({
-      id: String(i),
-      titulo: `Barreira Sistêmica #${i} em Software Interno`,
-      descricao: 'Problemas recorrentes de contraste e navegação por teclado em ferramenta administrativa.',
-      status: DemandaStatus.EM_ANDAMENTO,
-      prioridade: i % 2 === 0 ? 'MEDIA' : 'ALTA',
+      id: `pr-${i}`,
+      titulo: `Ajuste de Software PR #${i}`,
+      descricao: 'Melhoria de usabilidade reportada em sistema interno.',
+      status: DemandaStatus.NOVA,
+      prioridade: 'BAIXA',
       categoria: { id: 'c2', nome: 'Sistemas Digitais' },
       tipoBarreira: { id: 'b2', slug: TipoBarreira.TECNOLOGICA, nome: 'Tecnológica' },
-      unidade: 'EDISE - Rio de Janeiro',
-      autor: mockUsers[3], // Rafael Caldeira (ID 4)
+      unidade: 'REPAR - Araucária',
+      autor: mockUsers[0],
       respostas: [],
-      votos: Math.floor(Math.random() * 10),
-      createdAt: '2024-04-12T10:00:00Z',
-      updatedAt: '2024-04-12T10:00:00Z',
-      coordinates: UNIT_LOCATIONS["EDISE - Rio de Janeiro"],
-      aiAnalysis: {
-        suggestedArea: 'TIC',
-        confidence: 0.88,
-        clusterId: i % 3 === 0 ? 'CLUSTER-SAP-2024' : undefined,
-      },
-      iniciativaVinculada: i % 3 === 0 ? {
-        id: 'ini-sap-24',
-        nome: 'Acessibilidade ERP Nacional',
-        status: 'EM_PLANEJAMENTO'
-      } : undefined
+      votos: 3,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      coordinates: UNIT_LOCATIONS['REPAR - Araucária'],
+      aiAnalysis: { suggestedArea: 'TI', confidence: 0.88 }
     });
   }
 
-  // Injetar relatos de barreira atitudinal (SP)
-  for (let i = 16; i <= 20; i++) {
+  // 3. ESTÁVEIS (GREEN, 0-1 demanda) -> MG, CE, RS, AM
+  // MG (REGAP) = 1
+  base.push({
+    id: `mg-1`,
+    titulo: 'Pequeno Ajuste REGAP',
+    descricao: 'Ajuste de sinalização em rampa lateral.',
+    status: DemandaStatus.RESOLVIDA,
+    prioridade: 'BAIXA',
+    categoria: { id: 'c0', nome: 'Infraestrutura' },
+    tipoBarreira: { id: 'b1', slug: TipoBarreira.ARQUITETONICA, nome: 'Arquitetônica' },
+    unidade: 'REGAP - Betim',
+    autor: mockUsers[0],
+    respostas: [],
+    votos: 0,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    coordinates: UNIT_LOCATIONS['REGAP - Betim'],
+    aiAnalysis: { suggestedArea: 'Infraestrutura', confidence: 0.99 }
+  });
+
+  // CE (LUBNOR) = 1
+  base.push({
+    id: `ce-1`,
+    titulo: 'Consulta de Normativa LUBNOR',
+    descricao: 'Esclarecimento sobre política de inclusão.',
+    status: DemandaStatus.RESOLVIDA,
+    prioridade: 'BAIXA',
+    categoria: { id: 'c3', nome: 'Cultura' },
+    tipoBarreira: { id: 'b3', slug: TipoBarreira.INSTITUCIONAL, nome: 'Institucional' },
+    unidade: 'LUBNOR - Fortaleza',
+    autor: mockUsers[1],
+    respostas: [],
+    votos: 1,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    coordinates: UNIT_LOCATIONS['LUBNOR - Fortaleza'],
+  });
+
+  // PE (RNEST) = 6 (AMARELO)
+  for (let i = 1; i <= 6; i++) {
     base.push({
-      id: String(i),
-      titulo: `Comportamento Restritivo #${i}`,
-      descricao: 'Relato de infantilização e brincadeiras não apropriadas relacionadas à deficiência física.',
-      status: DemandaStatus.NOVO,
+      id: `pe-${i}`,
+      titulo: `Monitoramento RNEST #${i}`,
+      descricao: 'Acompanhamento de conformidade na Refinaria Abreu e Lima.',
+      status: DemandaStatus.NOVA,
       prioridade: 'MEDIA',
-      categoria: { id: 'c3', nome: 'Cultura e Liderança' },
-      tipoBarreira: { id: 'b3', slug: TipoBarreira.COMUNICACIONAL, nome: 'Atitudinal (Comportamental)' },
-      unidade: 'RPBC - Cubatão',
-      autor: mockUsers[1],
+      categoria: { id: 'c0', nome: 'Infraestrutura' },
+      tipoBarreira: { id: 'b1', slug: TipoBarreira.ARQUITETONICA, nome: 'Arquitetônica' },
+      unidade: 'RNEST - Abreu e Lima',
+      autor: mockUsers[2],
       respostas: [],
-      votos: 2,
-      createdAt: '2024-04-14T08:00:00Z',
-      updatedAt: '2024-04-14T08:00:00Z',
-      coordinates: UNIT_LOCATIONS["RPBC - Cubatão"],
-      aiAnalysis: {
-        suggestedArea: 'Recursos Humanos',
-        confidence: 0.95,
-        isAttitudinal: true,
-      }
+      votos: 5,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      coordinates: UNIT_LOCATIONS['RNEST - Abreu e Lima'],
+      aiAnalysis: { suggestedArea: 'Infraestrutura', confidence: 0.92 }
     });
   }
+
+  // AM (Urucu) = 1 (VERDE)
+  base.push({
+    id: `am-1`,
+    titulo: 'Logística Urucu',
+    descricao: 'Melhoria de sinalização no polo de extração.',
+    status: DemandaStatus.RESOLVIDA,
+    prioridade: 'BAIXA',
+    categoria: { id: 'c0', nome: 'Infraestrutura' },
+    tipoBarreira: { id: 'b1', slug: TipoBarreira.ARQUITETONICA, nome: 'Arquitetônica' },
+    unidade: 'Urucu - Coari',
+    autor: mockUsers[0],
+    respostas: [],
+    votos: 0,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    coordinates: UNIT_LOCATIONS['Urucu - Coari'],
+    aiAnalysis: { suggestedArea: 'Operações', confidence: 0.99 }
+  });
+
+  // RN (Polo Onshore) = 1 (VERDE)
+  base.push({
+    id: `rn-1`,
+    titulo: 'Acessibilidade Onshore RN',
+    descricao: 'Revisão de rotas acessíveis em campos terrestres.',
+    status: DemandaStatus.NOVA,
+    prioridade: 'MEDIA',
+    categoria: { id: 'c0', nome: 'Infraestrutura' },
+    tipoBarreira: { id: 'b1', slug: TipoBarreira.ARQUITETONICA, nome: 'Arquitetônica' },
+    unidade: 'Polo Onshore RN',
+    autor: mockUsers[1],
+    respostas: [],
+    votos: 2,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    coordinates: UNIT_LOCATIONS['Polo Onshore RN'],
+    aiAnalysis: { suggestedArea: 'Infraestrutura', confidence: 0.85 }
+  });
+
+  // ES e SC = 1 cada (VERDE)
+  [
+    { unit: 'Terminais ES', area: 'ES' },
+    { unit: 'Terminais SC', area: 'SC' }
+  ].forEach((item, idx) => {
+    base.push({
+      id: `unit-ext-${idx}`,
+      titulo: `Padrão de Segurança - ${item.unit}`,
+      descricao: 'Verificação periódica de dispositivos de acessibilidade.',
+      status: DemandaStatus.RESOLVIDA,
+      prioridade: 'BAIXA',
+      categoria: { id: 'c4', nome: 'Segurança / SMS' },
+      tipoBarreira: { id: 'b5', slug: TipoBarreira.INSTITUCIONAL, nome: 'Institucional' },
+      unidade: item.unit,
+      autor: mockUsers[0],
+      respostas: [],
+      votos: 0,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      coordinates: UNIT_LOCATIONS[item.unit],
+      aiAnalysis: { suggestedArea: 'SMS', confidence: 0.98 }
+    });
+  });
 
   return base;
 };
