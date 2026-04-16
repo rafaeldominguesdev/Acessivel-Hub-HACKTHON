@@ -29,14 +29,21 @@ export function Header() {
             </div>
           )}
         </Link>
-        <div className="flex-1 flex items-center h-16 border-b border-slate-200">
-          <div className="flex items-center gap-4 w-full max-w-3xl px-6">
-            <div className="relative w-full">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+        <div className="flex-1 flex items-center h-16 border-b border-slate-200 bg-white">
+          <div className="flex items-center gap-4 w-full max-w-2xl px-8">
+            <div className="relative w-full group">
+              <div className="absolute left-3.5 top-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none transition-colors group-focus-within:text-[#008542]">
+                <Search className="w-4 h-4 text-slate-400 group-focus-within:text-[#008542]" />
+              </div>
               <Input 
-                placeholder="Buscar demandas, respostas..." 
-                className="pl-10 bg-slate-50 border-none h-10 ring-offset-0 focus-visible:ring-1 focus-visible:ring-primary/20"
+                placeholder="Pesquisar demandas, processos ou usuários..." 
+                className="pl-11 pr-16 bg-slate-50/50 border-slate-200/60 h-10 rounded-xl transition-all duration-300 focus-visible:bg-white focus-visible:ring-0 focus-visible:border-[#008542]/30 focus-visible:shadow-[0_0_20px_-5px_rgba(0,133,66,0.15)] placeholder:text-slate-400 placeholder:font-medium"
               />
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none flex items-center gap-1">
+                <kbd className="hidden sm:flex h-5 select-none items-center gap-1 rounded border border-slate-200 bg-white px-1.5 font-sans text-[10px] font-bold text-slate-400 shadow-sm">
+                  <span className="text-xs">⌘</span>K
+                </kbd>
+              </div>
             </div>
           </div>
         </div>

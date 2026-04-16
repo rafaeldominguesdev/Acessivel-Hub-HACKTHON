@@ -43,7 +43,7 @@ export default function UserDemandListPage() {
         <Link href="/user/nova-demanda">
           <Button className="h-11 px-6 bg-[#008542] hover:bg-[#006e36] text-white font-black uppercase tracking-widest text-[10px] shadow-sm gap-2">
             <PlusCircle className="w-4 h-4" />
-            Novo Registro
+            Novo Tópico
           </Button>
         </Link>
       </div>

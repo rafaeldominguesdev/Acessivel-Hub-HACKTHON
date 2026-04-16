@@ -173,14 +173,14 @@ export function DemandForm() {
               className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.22em] text-slate-500 hover:text-slate-900 transition-colors"
             >
               <ChevronLeft className="w-4 h-4" />
-              Meus relatos
+              Meus tópicos
             </Link>
             <div className="h-4 w-[1px] bg-slate-200" />
             <span className="inline-flex items-center rounded-full bg-[#008542]/10 text-[#008542] px-3 py-1 text-[10px] font-black uppercase tracking-[0.22em]">
-              Novo registro
+              Novo Tópico
             </span>
           </div>
-          <h1 className="title-font text-4xl font-black tracking-tight text-slate-900">Registrar relato</h1>
+          <h1 className="title-font text-4xl font-black tracking-tight text-slate-900">Registrar Tópico</h1>
           <p className="title-font text-sm font-medium text-slate-500">
             Quanto mais detalhes (sem citar nomes), mais rápido a triagem encaminha para a área certa.
           </p>
@@ -212,7 +212,7 @@ export function DemandForm() {
                   <div className="flex items-center justify-between gap-4">
                     <div>
                       <CardTitle className="text-sm font-black uppercase tracking-[0.2em] text-slate-600">
-                        Detalhes do relato
+                        Detalhes do tópico
                       </CardTitle>
                       <CardDescription className="text-xs font-medium text-slate-500 mt-1">
                         Descreva o que aconteceu e o impacto observado.
@@ -258,7 +258,7 @@ export function DemandForm() {
                           />
                         </FormControl>
                         <FormDescription className="text-xs">
-                          Evite citar nomes de pessoas, foque no ambiente ou processo.
+                          Descreva o tópico de forma clara, foque no ambiente ou processo.
                         </FormDescription>
                         <FormMessage />
                       </FormItem>
@@ -315,7 +315,7 @@ export function DemandForm() {
                 <CardContent className="p-6 space-y-4">
                   {!aiState ? (
                     <div className="text-xs font-medium text-slate-400 text-center py-4">
-                      Comece a digitar o Relato Detalhado para a inteligência artificial categorizar e sugerir soluções proativamente.
+                      Comece a digitar a Descrição do Tópico para a inteligência artificial categorizar e sugerir soluções proativamente.
                     </div>
                   ) : (
                     <div className="space-y-4 animate-in fade-in slide-in-from-top-2 duration-300">
@@ -422,7 +422,7 @@ export function DemandForm() {
                       disabled={isSubmitting}
                       className="w-full h-14 bg-[#008542] hover:bg-[#006e36] disabled:opacity-60 text-white font-black uppercase tracking-[0.2em] text-xs shadow-lg shadow-[#008542]/20 gap-2 rounded-2xl"
                     >
-                      {isSubmitting ? "Enviando..." : "Enviar relato"} <ArrowRight className="w-4 h-4" />
+                      {isSubmitting ? "Enviando..." : "Publicar Tópico"} <ArrowRight className="w-4 h-4" />
                     </Button>
                     <p className="text-[11px] text-slate-400 font-medium mt-3 text-center">
                       Ao enviar, você concorda em não incluir dados pessoais sensíveis.

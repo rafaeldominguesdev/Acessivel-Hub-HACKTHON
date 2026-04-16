@@ -42,8 +42,8 @@ const sidebarItems = [
         icon: FileText,
       },
       {
-        title: "Nova Demanda",
-        href: "/nova-demanda",
+        title: "Novo Tópico",
+        href: "/user/nova-demanda",
         icon: PlusCircle,
       },
     ],

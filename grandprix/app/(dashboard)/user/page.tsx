@@ -88,7 +88,7 @@ export default function UserDashboardPage() {
         <Link href="/user/nova-demanda">
           <Button className="h-11 px-6 bg-[#008542] hover:bg-[#006e36] text-white font-bold uppercase tracking-widest text-[10px] rounded-full shadow-md gap-2 transition-colors">
             <PlusCircle className="w-4 h-4 text-white" />
-            Novo Registro
+            Novo Tópico
           </Button>
         </Link>
       </div>

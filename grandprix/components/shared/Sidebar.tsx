@@ -43,7 +43,7 @@ const menuItems = [
     items: [
       { title: "Início", href: "/", icon: LayoutDashboard },
       { title: "Minhas Demandas", href: "/demandas", icon: FileText },
-      { title: "Nova Demanda", href: "/nova-demanda", icon: PlusCircle },
+      { title: "Novo Tópico", href: "/user/nova-demanda", icon: PlusCircle },
     ],
   },
   {
