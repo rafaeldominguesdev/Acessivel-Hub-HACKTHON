@@ -275,109 +275,86 @@ export function LoginForm() {
           viewBox="0 0 1440 900"
           preserveAspectRatio="xMidYMid slice"
         >
-          {/* Grid de hexágonos (referência indústria petrolífera) */}
           <defs>
             <pattern id="hex-pattern" x="0" y="0" width="80" height="92" patternUnits="userSpaceOnUse">
               <polygon points="40,2 78,22 78,70 40,90 2,70 2,22"
-                fill="none" stroke="rgba(255,198,50,0.06)" strokeWidth="1" />
+                fill="none" stroke="rgba(255,198,50,0.055)" strokeWidth="1" />
             </pattern>
-            <pattern id="hex-pattern-2" x="40" y="46" width="80" height="92" patternUnits="userSpaceOnUse">
-              <polygon points="40,2 78,22 78,70 40,90 2,70 2,22"
-                fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
-            </pattern>
-            <radialGradient id="fade-center" cx="50%" cy="50%" r="50%">
+            <radialGradient id="fade-center" cx="50%" cy="50%" r="55%">
               <stop offset="0%" stopColor="rgba(4,17,26,0)" />
-              <stop offset="100%" stopColor="rgba(4,17,26,0.85)" />
+              <stop offset="100%" stopColor="rgba(4,17,26,0.8)" />
             </radialGradient>
           </defs>
 
-          {/* Hexágonos de fundo */}
+          {/* Grid hexágonos */}
           <rect width="1440" height="900" fill="url(#hex-pattern)" />
-          <rect width="1440" height="900" fill="url(#hex-pattern-2)" />
-          {/* Vinheta para não competir com card */}
           <rect width="1440" height="900" fill="url(#fade-center)" />
 
-          {/* Logo Petrobras watermark — "P" estilizado grande */}
-          <text x="72" y="520" fontFamily="Georgia, serif" fontSize="420" fontWeight="900"
-            fill="rgba(0,127,63,0.07)" letterSpacing="-20">P</text>
+          {/* Linhas diagonais sutis */}
+          <line x1="0" y1="0" x2="380" y2="900" stroke="rgba(255,198,50,0.04)" strokeWidth="1.5" />
+          <line x1="1440" y1="0" x2="1060" y2="900" stroke="rgba(0,127,63,0.06)" strokeWidth="1.5" />
 
-          {/* Letra menor espelhada canto direito */}
-          <text x="1020" y="260" fontFamily="Georgia, serif" fontSize="220" fontWeight="900"
-            fill="rgba(255,198,50,0.04)" letterSpacing="-10">PETROBRAS</text>
+          {/* Círculos concêntricos canto superior direito */}
+          <circle cx="1360" cy="60" r="200" fill="none" stroke="rgba(255,198,50,0.06)" strokeWidth="1.5" />
+          <circle cx="1360" cy="60" r="130" fill="none" stroke="rgba(255,198,50,0.04)" strokeWidth="1" />
+          <circle cx="1360" cy="60" r="60"  fill="none" stroke="rgba(255,198,50,0.03)" strokeWidth="1" />
 
-          {/* Linha diagonal dourada superior */}
-          <line x1="0" y1="0" x2="400" y2="900" stroke="rgba(255,198,50,0.05)" strokeWidth="1.5" />
-          <line x1="60" y1="0" x2="460" y2="900" stroke="rgba(255,198,50,0.03)" strokeWidth="1" />
+          {/* Círculos concêntricos canto inferior esquerdo */}
+          <circle cx="80" cy="840" r="160" fill="none" stroke="rgba(0,127,63,0.09)" strokeWidth="1.5" />
+          <circle cx="80" cy="840" r="90"  fill="none" stroke="rgba(0,127,63,0.05)" strokeWidth="1" />
 
-          {/* Linha diagonal direita */}
-          <line x1="1440" y1="0" x2="1040" y2="900" stroke="rgba(0,127,63,0.08)" strokeWidth="1.5" />
-          <line x1="1380" y1="0" x2="980" y2="900" stroke="rgba(0,127,63,0.04)" strokeWidth="1" />
+          {/* Símbolo Petrobras inline — canto inferior direito */}
+          <g transform="translate(1130, 580)" opacity="0.07">
+            {/* Forma do símbolo P da Petrobras simplificado */}
+            <circle cx="80" cy="80" r="78" fill="none" stroke="white" strokeWidth="12" />
+            <circle cx="80" cy="80" r="50" fill="none" stroke="white" strokeWidth="8" />
+            <rect x="68" y="2" width="24" height="78" fill="white" rx="4" />
+            <text x="80" y="190" textAnchor="middle" fill="white" fontFamily="Arial, sans-serif"
+              fontSize="22" fontWeight="700" letterSpacing="4">PETROBRAS</text>
+          </g>
 
-          {/* Círculo decorativo canto superior direito */}
-          <circle cx="1340" cy="80" r="180" fill="none" stroke="rgba(255,198,50,0.07)" strokeWidth="1.5" />
-          <circle cx="1340" cy="80" r="120" fill="none" stroke="rgba(255,198,50,0.05)" strokeWidth="1" />
-          <circle cx="1340" cy="80" r="60"  fill="none" stroke="rgba(255,198,50,0.04)" strokeWidth="1" />
+          {/* Símbolo menor — canto superior esquerdo */}
+          <g transform="translate(30, 30)" opacity="0.05">
+            <circle cx="50" cy="50" r="46" fill="none" stroke="white" strokeWidth="7" />
+            <circle cx="50" cy="50" r="28" fill="none" stroke="white" strokeWidth="5" />
+            <rect x="43" y="4" width="14" height="46" fill="white" rx="2" />
+          </g>
 
-          {/* Círculo decorativo canto inferior esquerdo */}
-          <circle cx="100" cy="820" r="150" fill="none" stroke="rgba(0,127,63,0.1)" strokeWidth="1.5" />
-          <circle cx="100" cy="820" r="90"  fill="none" stroke="rgba(0,127,63,0.06)" strokeWidth="1" />
-
-          {/* Cruz/cruzinha estilizada */}
-          <line x1="200" y1="140" x2="200" y2="200" stroke="rgba(255,198,50,0.18)" strokeWidth="1.5" strokeLinecap="round" />
-          <line x1="170" y1="170" x2="230" y2="170" stroke="rgba(255,198,50,0.18)" strokeWidth="1.5" strokeLinecap="round" />
-
-          <line x1="1260" y1="700" x2="1260" y2="760" stroke="rgba(255,255,255,0.1)" strokeWidth="1.5" strokeLinecap="round" />
-          <line x1="1230" y1="730" x2="1290" y2="730" stroke="rgba(255,255,255,0.1)" strokeWidth="1.5" strokeLinecap="round" />
-
-          {/* Pontos decorativos */}
-          <circle cx="320" cy="80"  r="2.5" fill="rgba(255,198,50,0.3)" />
-          <circle cx="340" cy="80"  r="2.5" fill="rgba(255,198,50,0.2)" />
-          <circle cx="360" cy="80"  r="2.5" fill="rgba(255,198,50,0.15)" />
-
-          <circle cx="1100" cy="820" r="2.5" fill="rgba(255,255,255,0.2)" />
-          <circle cx="1120" cy="820" r="2.5" fill="rgba(255,255,255,0.12)" />
-          <circle cx="1140" cy="820" r="2.5" fill="rgba(255,255,255,0.08)" />
-
-          {/* Símbolo petróleo — gota estilizada canto direito */}
-          <path d="M1380 400 Q1410 360 1420 390 Q1430 420 1380 440 Q1330 420 1340 390 Q1350 360 1380 400 Z"
-            fill="rgba(255,198,50,0.05)" stroke="rgba(255,198,50,0.1)" strokeWidth="1" />
+          {/* Detalhes pequenos */}
+          <line x1="200" y1="150" x2="200" y2="200" stroke="rgba(255,198,50,0.2)" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="175" y1="175" x2="225" y2="175" stroke="rgba(255,198,50,0.2)" strokeWidth="1.5" strokeLinecap="round" />
+          <circle cx="330" cy="80" r="2.5" fill="rgba(255,198,50,0.3)" />
+          <circle cx="348" cy="80" r="2.5" fill="rgba(255,198,50,0.2)" />
+          <circle cx="366" cy="80" r="2.5" fill="rgba(255,198,50,0.12)" />
         </svg>
 
-        {/* Logo Petrobras — marca d'água grande no fundo */}
-        <img
-          src="/petrobras-logo.png"
-          alt=""
+        {/* Logo Petrobras inline — canto inferior direito (grande) */}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 192.756 192.756"
           aria-hidden="true"
-          style={{
-            position: "absolute",
-            bottom: "5%",
-            right: "5%",
-            width: "260px",
-            opacity: 0.07,
-            filter: "brightness(0) invert(1)",
-            pointerEvents: "none",
-            zIndex: 2,
-            userSelect: "none",
-          }}
-        />
+          style={{ position:"absolute", bottom:"5%", right:"5%", width:220, opacity:0.1, pointerEvents:"none", zIndex:2 }}
+        >
+          <g fillRule="evenodd" clipRule="evenodd">
+            <path fill="rgba(255,255,255,0.6)" d="M57.218 86.127h14.549c2.889 0 5.51 1.855 5.51 4.914 0 4.125-3.288 7.009-7.846 7.009H53.857l3.361-11.923zM128.797 86.205h13.748c6.516 0 6.775 4.429 6.775 5.69 0 2.946-2.594 8.735-10.504 8.735H124.81c.001.001 3.913-14.072 3.987-14.425zM50.339 110.434h12.58c6.16 0 6.51 1.672 7.358 3.104.844 1.424.455 4.432-.129 5.469-.735 1.303-1.979 5.336-9.856 5.336H46.318c0-.001 4.014-13.892 4.021-13.909z"/>
+            <path fill="rgba(255,255,255,0.6)" d="M183.297 73.233v110.579H8.742V73.233h33.589l-18.61 64.372h38.096c16.502 0 19.377-3.857 22.727-6.664 4.475-3.752 6.872-12.682 4.863-18.893-1.421-4.393-5.576-7.051-6.029-7.18 5.155-2.395 8.156-7.639 8.526-8.412 1.913-3.978 3.396-11.184-1.361-16.982-3.956-4.818-11.64-6.146-17.216-6.242h40.787l-18.675 64.501h18.901l6.904-24.455h10.797c7.846 0 7.133 4.883 7.328 6.988l.615 17.984 17.553-.006s-.791-20.182-.859-21.662c-.232-5.182-3.67-7.52-6.598-7.52 5.623-1.521 10.502-6.627 12.455-9.896 2.25-3.774 3.943-9.781 1.719-15.742-3.232-8.653-11.559-10.091-17.377-10.193h36.42v.002z"/>
+            <path fill="rgba(255,198,50,0.7)" d="M8.742 52.09h174.555V9.809H8.742V52.09z"/>
+          </g>
+        </svg>
 
-        {/* Logo menor no canto superior esquerdo também */}
-        <img
-          src="/petrobras-logo.png"
-          alt=""
+        {/* Logo Petrobras inline — canto superior esquerdo (pequena) */}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 192.756 192.756"
           aria-hidden="true"
-          style={{
-            position: "absolute",
-            top: "6%",
-            left: "4%",
-            width: "130px",
-            opacity: 0.05,
-            filter: "brightness(0) invert(1)",
-            pointerEvents: "none",
-            zIndex: 2,
-            userSelect: "none",
-          }}
-        />
+          style={{ position:"absolute", top:"5%", left:"4%", width:110, opacity:0.07, pointerEvents:"none", zIndex:2 }}
+        >
+          <g fillRule="evenodd" clipRule="evenodd">
+            <path fill="rgba(255,255,255,0.6)" d="M57.218 86.127h14.549c2.889 0 5.51 1.855 5.51 4.914 0 4.125-3.288 7.009-7.846 7.009H53.857l3.361-11.923zM128.797 86.205h13.748c6.516 0 6.775 4.429 6.775 5.69 0 2.946-2.594 8.735-10.504 8.735H124.81c.001.001 3.913-14.072 3.987-14.425zM50.339 110.434h12.58c6.16 0 6.51 1.672 7.358 3.104.844 1.424.455 4.432-.129 5.469-.735 1.303-1.979 5.336-9.856 5.336H46.318c0-.001 4.014-13.892 4.021-13.909z"/>
+            <path fill="rgba(255,255,255,0.6)" d="M183.297 73.233v110.579H8.742V73.233h33.589l-18.61 64.372h38.096c16.502 0 19.377-3.857 22.727-6.664 4.475-3.752 6.872-12.682 4.863-18.893-1.421-4.393-5.576-7.051-6.029-7.18 5.155-2.395 8.156-7.639 8.526-8.412 1.913-3.978 3.396-11.184-1.361-16.982-3.956-4.818-11.64-6.146-17.216-6.242h40.787l-18.675 64.501h18.901l6.904-24.455h10.797c7.846 0 7.133 4.883 7.328 6.988l.615 17.984 17.553-.006s-.791-20.182-.859-21.662c-.232-5.182-3.67-7.52-6.598-7.52 5.623-1.521 10.502-6.627 12.455-9.896 2.25-3.774 3.943-9.781 1.719-15.742-3.232-8.653-11.559-10.091-17.377-10.193h36.42v.002z"/>
+            <path fill="rgba(255,198,50,0.7)" d="M8.742 52.09h174.555V9.809H8.742V52.09z"/>
+          </g>
+        </svg>
 
         <div className="top-logo">
           <div className="logo-badge">PB</div>
